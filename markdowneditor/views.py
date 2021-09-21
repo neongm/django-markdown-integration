@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Page
 from markdown import markdown
 
 
 def index(req):
-
     pages = Page.objects.order_by("title")
     print(pages)
     context = {
@@ -14,4 +13,10 @@ def index(req):
 
 
 def editor(req):
+    if req.method == "POST":
+        title = req.POST.get("title")
+        mkfield = req.POST.get("mkfield")
+        page = Page(title=title, markdown_field=mkfield)
+        page.save()
+        return redirect('index')
     return render(req, 'markdowneditor/editor.html')
