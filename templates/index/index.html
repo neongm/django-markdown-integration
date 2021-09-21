@@ -5,18 +5,18 @@
 {% block content %}
 <style>
     img{
-        width: 100%;
+        max-width: 100%;
         border-radius: 5px;
         border: solid 1px #f1f1f1;
     }
 </style>
-<div class="bg-dark rounded border container text-white">
+<div class="bg-light rounded border container text-dark">
     <div class="row m-2 p-2">
-        <div class="col"><h1>the stuff i wrote for testing:</h1></div>
+        <div class="col"><h1>the stuff i wrote for testing</h1></div>
     </div>
-    <br>
+    <hr />
     {% for mkpage in mkpages %}
-    <div class="row m-2 p-2 bg-light text-dark border rounded">
+    <div class="row m-2 p-2 bg-white text-dark border rounded">
         <div class="col">
 
             {{mkpage.mkpage|safe}}
