@@ -1,10 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'layout.html '%}
 
-</body>
-</html>
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    img{
+        max-width: 100%;
+        border-radius: 5px;
+        border: solid 1px #f1f1f1;
+    }
+</style>
+<div class="container bg-light border rounded">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col bg-white border rounded m-1 p-2">
+            <div id="editor">
+                <h4>editor</h4>
+                <hr />
+                <form method="POST">
+                    <input style="margin-bottom: 5px;" id="title" name="title" class="form-control" type="text" placeholder="title" onchange="update_title_preview()">
+                    <textarea id="mkfield" name="mkfield" class="form-control" rows="20" onchange="update_mkfield_preview()"></textarea>
+                </form>
+                <br>
+                <input type="submit" class="form-control btn btn-primary">
+            </div>
+            <br>
+            <button class="btn btn-secondary w-100" onclick="save_states()">save locally</button>
+        </div>
+        <div class="col bg-white border rounded m-1 p-2">
+            <h4>preview</h4>
+            <hr />
+            <div id="title_preview">title</div>
+            <hr />
+            <div id="mkfield_preview">markdown</div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.onload = load_states();
+
+function load_states()
+{
+    console.log("attimpting to load states");
+    console.log(localStorage.getItem("edtior_saved"));
+    console.log("mkfield: "+localStorage.getItem("editor_mkfield"));
+    console.log("title: "+localStorage.getItem("editor_title"));
+    if(localStorage.getItem("edtior_saved")=="true")
+    {
+        title = localStorage.getItem("editor_title");
+        mkfield = localStorage.getItem("editor_mkfield");
+        if(title!=null && title !=''){
+            document.getElementById('title').value = title;
+            document.getElementById('title_preview').value = title;
+        }
+        if(mkfield!=null && mkfield !='') document.getElementById('mkfield').value = mkfield;
+        update_mkfield_preview();
+    }
+}
+
+function save_states()
+{
+    localStorage.setItem("edtior_saved", true)
+    localStorage.setItem("editor_title", document.getElementById('title').value);
+    localStorage.setItem("editor_mkfield", document.getElementById("mkfield").value);
+}
+
+function update_title_preview()
+{
+    document.getElementById('title_preview').innerHTML = marked(document.getElementById('title').value);
+}
+
+function update_mkfield_preview()
+{
+    document.getElementById('mkfield_preview').innerHTML = marked(document.getElementById('mkfield').value);
+}
+
+
+</script>
+
+{% endblock %}
