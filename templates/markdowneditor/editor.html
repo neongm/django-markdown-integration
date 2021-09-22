@@ -76,6 +76,7 @@ function update_title_preview()
 function update_mkfield_preview()
 {
     document.getElementById('mkfield_preview').innerHTML = marked(document.getElementById('mkfield').value);
+    update_title_preview();
 }
 
 
