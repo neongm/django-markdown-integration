@@ -5,7 +5,6 @@ from markdown import markdown
 
 def index(req):
     pages = Page.objects.order_by("id")[::-1]
-    print(pages)
     context = {
         "mkpages": [{"mkpage": markdown(page.markdown_field, extensions=['fenced_code', 'codehilite']), 
                     "title": page.title, 
@@ -25,6 +24,8 @@ def editor(req):
     return render(req, 'markdowneditor/editor.html')
 
 def delete(req, id):
-    page = Page.objects.filter(id=id)[0]
-    page.delete()
+    try:
+        page = Page.objects.filter(id=id)[0]
+        page.delete()
+    except: pass
     return redirect('index')
