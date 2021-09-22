@@ -4,10 +4,13 @@ from markdown import markdown
 
 
 def index(req):
-    pages = Page.objects.order_by("title")
+    pages = Page.objects.order_by("id")[::-1]
     print(pages)
     context = {
-        'mkpages': [{"mkpage": markdown(page.markdown_field), "title": page.title} for page in pages]
+        "mkpages": [{"mkpage": markdown(page.markdown_field), 
+                    "title": page.title, 
+                    "id": page.id
+                    } for page in pages]
     }
     return render(req, 'index/index.html', context)
 
@@ -20,3 +23,8 @@ def editor(req):
         page.save()
         return redirect('index')
     return render(req, 'markdowneditor/editor.html')
+
+def delete(req, id):
+    page = Page.objects.filter(id=id)[0]
+    page.delete()
+    return redirect('index')
