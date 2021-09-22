@@ -17,7 +17,7 @@
     <hr />
     {% for mkpage in mkpages %}
     <div class="row m-2 p-2 bg-white text-dark border rounded">
-        <div class="w-100 text-center">{{mkpage.title}}</div>
+        <div class="w-100 text-center" style="margin-bottom: 5px;">{{mkpage.title}}</div>
         <div class="position-absolute">
             <a style="cursor: pointer;" id="{{mkpage.id}}" onclick="if(confirm('do u really want to delete it?')) delete_post(this.id)">X</a>
         </div>
