@@ -7,7 +7,7 @@ def index(req):
     pages = Page.objects.order_by("id")[::-1]
     print(pages)
     context = {
-        "mkpages": [{"mkpage": markdown(page.markdown_field), 
+        "mkpages": [{"mkpage": markdown(page.markdown_field, extensions=['fenced_code', 'codehilite']), 
                     "title": page.title, 
                     "id": page.id
                     } for page in pages]

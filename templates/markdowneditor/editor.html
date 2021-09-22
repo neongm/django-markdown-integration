@@ -20,7 +20,7 @@
                 <hr />
                 <form method="POST">
                     {% csrf_token %}
-                    <input style="margin-bottom: 5px;" id="title" name="title" class="form-control" type="text" placeholder="title" onchange="update_title_preview()">
+                    <input style="margin-bottom: 5px;" id="title" name="title" class="form-control" type="text" placeholder="title" value=' ' onchange="update_title_preview()">
                     <textarea id="mkfield" name="mkfield" class="form-control" rows="20" onchange="update_mkfield_preview()"></textarea>
                     <br>
                     <input type="submit" class="form-control btn btn-primary">
