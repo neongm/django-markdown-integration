@@ -18,7 +18,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="index"),
+    # path('', views.index, name="index"),
+    path('', views.index, name="index_start"),
+    path('<int:page_id>', views.index, name="index_id"),
     path('editor/', views.editor, name="editor"),
     path('delete/<int:id>', views.delete, name="delete")
 ]
