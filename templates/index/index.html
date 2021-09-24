@@ -14,22 +14,55 @@
 
 <div class="bg-light rounded border container-fluid text-dark">
     <div class="row p-2">
-        <div class="col"><h1 class="display-5">markdown stuff:</h1></div>
-    </div>
-    {% for mkpage in mkpages %}
-    <div class="row m-2 p-2 bg-white text-dark border rounded">
-        <div class="w-100 text-center" style="margin-bottom: 5px;">{{mkpage.title}}</div>
-        <div class="position-absolute" style="width: 10px;">
-            <a style="cursor: pointer;" id="{{mkpage.id}}" onclick="if(confirm('do u really want to delete it?')) delete_post(this.id)">X</a>
-        </div>
-        <hr />
-        <div class="col">
-
-            {{mkpage.mkpage|safe}}
-
+        <div class="col d-flex justify-content-center">
+            {% for link in all_pages_links %}
+                {% if link == current_page_id %}
+                <a class="lead text-decoration-bald text-dark m-1 " href="{{link}}">{{link}}</a>
+                {% else %}
+                <a class="lead text-decoration-none m-1 text-dark" href="{{link}}">{{link}}</a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
+    {% if mkpages %}
+        {% for mkpage in mkpages %}
+        <div class="row m-2 p-2 bg-white text-dark border rounded">
+            <div class="w-100 text-center" style="margin-bottom: 5px;">{{mkpage.title}}</div>
+            <div class="position-absolute" style="width: 10px;">
+                <a style="cursor: pointer;" id="{{mkpage.id}}" onclick="if(confirm('do u really want to delete it?')) delete_post(this.id)">X</a>
+            </div>
+            <hr />
+            <div class="col">
+
+                {{mkpage.mkpage|safe}}
+
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="row m-2 p-2 bg-black text-light rounded justify-content-center align-content-center" style="height: 70vh">
+            <div class="col">
+                <h3 class="display-6 text-center">this place is dark and empty, too empty.</h3>
+                <h5 class="lead text-center">but you can <a class="text-decoration-none" href="{% url 'editor' %}">add</a> a bit of content here.</h5>
+            </div>
+        </div>
+        <script>
+            let elements_light = document.getElementsByClassName("bg-light");
+            for(let i=0; i<elements_light.length; i++) elements_light[i].className += " bg-black";
+            
+            let elements_white = document.getElementsByClassName("bg-white");
+            for(let i=0; i<elements_white.length; i++) elements_white[i].className += " bg-black";
+            document.body.classList +="bg-black";
+            
+            let text = document.getElementsByClassName("text-dark");
+            for(let i=0; i<text.length; i++) text[i].className += " text-white";
+
+            let text_white = document.getElementsByClassName("text-black");
+            for(let i=0; i<text_white.length; i++) text_white[i].className += " text-white";
+
+
+        </script>
+    {% endif%}
     <br>
 </div>
 
