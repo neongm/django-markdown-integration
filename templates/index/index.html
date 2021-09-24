@@ -39,11 +39,22 @@
             </div>
         </div>
         {% endfor %}
+    <div class="row p-2">
+        <div class="col d-flex justify-content-center">
+            {% for link in all_pages_links %}
+                {% if link == current_page_id %}
+                <a class="lead text-decoration-bald text-dark m-1 " href="{{link}}">{{link}}</a>
+                {% else %}
+                <a class="lead text-decoration-none m-1 text-dark" href="{{link}}">{{link}}</a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
     {% else %}
         <div class="row m-2 p-2 bg-black text-light rounded justify-content-center align-content-center" style="height: 70vh">
             <div class="col">
-                <h3 class="display-6 text-center">this place is dark and empty, too empty.</h3>
-                <h5 class="lead text-center">but you can <a class="text-decoration-none" href="{% url 'editor' %}">add</a> a bit of content here.</h5>
+                <h3 class="display-6 text-center">{{id_error_message}}</h3>
+                <h5 class="lead text-center"><a class="text-decoration-none" href="{% url 'editor' %}">Add</a> a bit of content on the other end.</h5>
             </div>
         </div>
         <script>
