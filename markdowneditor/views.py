@@ -8,7 +8,7 @@ def index(req, page_id=0):
     id_error_message = "This place is dark and empty. Too empty."
     if(page_id==randint(0, 100)):
         page_id=99999999
-        id_error_message="Wow. That is impressive accident."
+        id_error_message="Wow. That's an impressive accident."
 
     content_per_page = 10
     pages = Page.objects.order_by("id")[::-1]
