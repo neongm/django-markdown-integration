@@ -6,13 +6,13 @@ import math
 
 def index(req, page_id=0):
     id_error_message = "This place is dark and empty. Too empty."
-    if(page_id==randint(0, 100)):
+    if(page_id==randint(0, 1000)):
         page_id=99999999
         id_error_message="Wow. That's an impressive accident."
 
     content_per_page = 10
     pages = Page.objects.order_by("id")[::-1]
-    all_pages_numbers =  [page_number for page_number in range(0, math.ceil(len(pages)/content_per_page))]
+    all_pages_numbers = [page_number for page_number in range(0, math.ceil(len(pages)/content_per_page))]
     amount_of_pages = len(all_pages_numbers)
 
     print("  ", amount_of_pages, len(Page.objects.order_by("id")))
